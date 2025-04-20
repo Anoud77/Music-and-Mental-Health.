@@ -55,33 +55,41 @@ The project explored several machine learning approaches:
 * **Model Training:** A Complement Naive Bayes classifier (`CNB()`) was initialized and trained on the training data (`classifier.fit(X_train, Y_train)`).
 * **Prediction:** Predictions were made on both the training and testing sets (`classifier.predict()`).
 * **Evaluation:** The model's performance was evaluated using:
-    * Accuracy score (`ACC_SC`).
+    * **Training Accuracy:** 0.740
+    * **Testing Accuracy:** 0.789
     * Confusion matrix (`confusion_matrix`).
     * F1-score (`f1_score`) with different averaging methods (None, weighted, micro, macro).
     * Precision score (`precision_score`) with different averaging methods.
     * Recall score (`recall_score`) with different averaging methods.
     * Visualization of confusion matrices for both training and testing data using heatmaps (`sns.heatmap()`).
-    * K-fold cross-validation (`cross_val_score`) to assess the model's generalization ability.
+    * K-fold cross-validation (`cross_val_score`) with a mean cross-validation score of 0.734.
 
 ### 2. Complement Naive Bayes with Feature Selection and Hyperparameter Tuning
 
 * **Feature Selection:** Some columns ('Timestamp', 'Primary streaming service', 'Permissions') were dropped from a copied DataFrame (`data_improving`) to potentially improve model performance.
 * **Data Splitting:** The modified data was again split into training and testing sets.
 * **Model Training:** A new Complement Naive Bayes classifier (`clf = CNB()`) was trained.
-* **Hyperparameter Tuning:** GridSearchCV (`GridSearchCV`) was used to find the optimal hyperparameters for the CNB model. The parameters tuned were `alpha`, `fit_prior`, `norm`, and `class_prior`.
-* **Best Model Evaluation:** The best model found by GridSearchCV was used to make predictions on the test set, and its performance was evaluated using accuracy and a classification report (`CLA_RE`). Confusion matrices for the best model on both training and testing data were also visualized.
+* **Hyperparameter Tuning:** GridSearchCV (`GridSearchCV`) was used to find the optimal hyperparameters for the CNB model. The best parameters found were `{'alpha': 10.0, 'class_prior': None, 'fit_prior': True, 'norm': True}` with a best cross-validation accuracy of 0.74.
+* **Best Model Evaluation:** The best model's performance on the test set was:
+    * **Testing Accuracy:** 0.789
+    * **Training Accuracy:** 0.743
+    * Classification report (`CLA_RE`). Confusion matrices for the best model on both training and testing data were also visualized.
 
 ### 3. Multi-layer Perceptron (MLP) Classifier (Neural Network)
 
 * **Model Initialization:** An MLPClassifier (`MLPClassifier`) was initialized with specific hidden layer sizes, maximum iterations, activation function ('relu'), solver ('adam'), and a random state for reproducibility.
 * **Model Training:** The MLP classifier was trained on the training data (`mlp.fit(train1, train2)`).
 * **Prediction:** Predictions were made on both the training and testing sets (`mlp.predict()`).
-* **Evaluation:** Similar to the CNB model, the MLP's performance was evaluated using accuracy, F1-score, precision, recall, and confusion matrix visualizations.
-* **Cross-validation:** K-fold cross-validation was also performed on the MLP model.
+* **Evaluation:** The MLP's performance was evaluated using:
+    * **Training Accuracy:** 0.726
+    * **Testing Accuracy:** 0.730
+    * F1-score, precision, recall, and confusion matrix visualizations.
+    * K-fold cross-validation (`cross_val_score`) with a mean cross-validation score of 0.735.
 
-## Results
+## Results Summary
 
-The results of the different models are presented in the code output, including accuracy scores, confusion matrices, and classification reports. Further analysis and interpretation of these results would be needed to draw meaningful conclusions about the relationship between music and mental health based on this data.
+The Complement Naive Bayes model, both with and without hyperparameter tuning, achieved a testing accuracy of approximately 78.9%. The Multi-layer Perceptron model yielded a slightly lower testing accuracy of around 73.0%.
+
 
 ## Author
 
